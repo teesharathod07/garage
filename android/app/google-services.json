@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "136970699723",
+    "project_id": "garage-guru-vj2x02",
+    "storage_bucket": "garage-guru-vj2x02.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136970699723:android:3f8f7138e41cbed17e2c4e",
+        "android_client_info": {
+          "package_name": "com.mycompany.garageguru"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnU7CfoJu53h5lVtE_dC3mz3kr74T58Og"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
