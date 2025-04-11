@@ -73,7 +73,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                               size: 16.0,
                             ),
                             onPressed: () async {
-                              context.pushNamed(UserdashWidget.routeName);
+                              context.safePop();
                             },
                           ),
                         ),
@@ -82,7 +82,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                           style:
                               FlutterFlowTheme.of(context).titleMedium.override(
                                     fontFamily: 'Inter Tight',
-                                    fontSize: 24.0,
+                                    fontSize: 28.0,
                                     letterSpacing: 0.0,
                                   ),
                         ),
@@ -339,6 +339,32 @@ class _SettingWidgetState extends State<SettingWidget> {
                                         ),
                                       ),
                                     ),
+                                    if (valueOrDefault(
+                                            currentUserDocument?.type, '') ==
+                                        'Admin')
+                                      AuthUserStreamWidget(
+                                        builder: (context) => Container(
+                                          width: double.infinity,
+                                          height: 1.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ),
+                                        ),
+                                      ),
+                                    if (valueOrDefault(
+                                            currentUserDocument?.type, '') ==
+                                        'Admin')
+                                      AuthUserStreamWidget(
+                                        builder: (context) => Container(
+                                          width: double.infinity,
+                                          height: 1.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ),
+                                        ),
+                                      ),
                                   ],
                                 ),
                               ),
@@ -668,37 +694,48 @@ class _SettingWidgetState extends State<SettingWidget> {
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      12.0,
-                                                                      0.0,
-                                                                      12.0,
-                                                                      0.0),
-                                                          child: Icon(
-                                                            Icons.logout,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .alternate,
-                                                            size: 22.0,
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        12.0,
+                                                                        0.0,
+                                                                        12.0,
+                                                                        0.0),
+                                                            child: Icon(
+                                                              Icons.logout,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .alternate,
+                                                              size: 22.0,
+                                                            ),
                                                           ),
                                                         ),
-                                                        Text(
-                                                          'Logout',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .alternate,
-                                                                fontSize: 16.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: Text(
+                                                            'Logout',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .alternate,
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                          ),
                                                         ),
                                                       ],
                                                     ),

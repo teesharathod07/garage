@@ -15,21 +15,6 @@ class ReviewsRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "review_id" field.
-  int? _reviewId;
-  int get reviewId => _reviewId ?? 0;
-  bool hasReviewId() => _reviewId != null;
-
-  // "user_id" field.
-  int? _userId;
-  int get userId => _userId ?? 0;
-  bool hasUserId() => _userId != null;
-
-  // "garage_id" field.
-  DocumentReference? _garageId;
-  DocumentReference? get garageId => _garageId;
-  bool hasGarageId() => _garageId != null;
-
   // "rating" field.
   int? _rating;
   int get rating => _rating ?? 0;
@@ -40,12 +25,15 @@ class ReviewsRecord extends FirestoreRecord {
   String get reviewText => _reviewText ?? '';
   bool hasReviewText() => _reviewText != null;
 
+  // "user_id" field.
+  DocumentReference? _userId;
+  DocumentReference? get userId => _userId;
+  bool hasUserId() => _userId != null;
+
   void _initializeFields() {
-    _reviewId = castToType<int>(snapshotData['review_id']);
-    _userId = castToType<int>(snapshotData['user_id']);
-    _garageId = snapshotData['garage_id'] as DocumentReference?;
     _rating = castToType<int>(snapshotData['rating']);
     _reviewText = snapshotData['review_text'] as String?;
+    _userId = snapshotData['user_id'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -83,19 +71,15 @@ class ReviewsRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createReviewsRecordData({
-  int? reviewId,
-  int? userId,
-  DocumentReference? garageId,
   int? rating,
   String? reviewText,
+  DocumentReference? userId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'review_id': reviewId,
-      'user_id': userId,
-      'garage_id': garageId,
       'rating': rating,
       'review_text': reviewText,
+      'user_id': userId,
     }.withoutNulls,
   );
 
@@ -107,16 +91,14 @@ class ReviewsRecordDocumentEquality implements Equality<ReviewsRecord> {
 
   @override
   bool equals(ReviewsRecord? e1, ReviewsRecord? e2) {
-    return e1?.reviewId == e2?.reviewId &&
-        e1?.userId == e2?.userId &&
-        e1?.garageId == e2?.garageId &&
-        e1?.rating == e2?.rating &&
-        e1?.reviewText == e2?.reviewText;
+    return e1?.rating == e2?.rating &&
+        e1?.reviewText == e2?.reviewText &&
+        e1?.userId == e2?.userId;
   }
 
   @override
-  int hash(ReviewsRecord? e) => const ListEquality()
-      .hash([e?.reviewId, e?.userId, e?.garageId, e?.rating, e?.reviewText]);
+  int hash(ReviewsRecord? e) =>
+      const ListEquality().hash([e?.rating, e?.reviewText, e?.userId]);
 
   @override
   bool isValidKey(Object? o) => o is ReviewsRecord;

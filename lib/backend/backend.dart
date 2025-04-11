@@ -12,6 +12,7 @@ import 'schema/booking_details_record.dart';
 import 'schema/reviews_record.dart';
 import 'schema/vehicles_record.dart';
 import 'schema/insurance_record.dart';
+import 'schema/appsettings_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -27,6 +28,7 @@ export 'schema/booking_details_record.dart';
 export 'schema/reviews_record.dart';
 export 'schema/vehicles_record.dart';
 export 'schema/insurance_record.dart';
+export 'schema/appsettings_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -282,6 +284,43 @@ Future<List<InsuranceRecord>> queryInsuranceRecordOnce({
     queryCollectionOnce(
       InsuranceRecord.collection,
       InsuranceRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query AppsettingsRecords (as a Stream and as a Future).
+Future<int> queryAppsettingsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      AppsettingsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<AppsettingsRecord>> queryAppsettingsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      AppsettingsRecord.collection,
+      AppsettingsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<AppsettingsRecord>> queryAppsettingsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      AppsettingsRecord.collection,
+      AppsettingsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

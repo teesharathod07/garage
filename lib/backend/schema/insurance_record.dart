@@ -15,11 +15,6 @@ class InsuranceRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "insurance_id" field.
-  int? _insuranceId;
-  int get insuranceId => _insuranceId ?? 0;
-  bool hasInsuranceId() => _insuranceId != null;
-
   // "user_id" field.
   DocumentReference? _userId;
   DocumentReference? get userId => _userId;
@@ -35,11 +30,28 @@ class InsuranceRecord extends FirestoreRecord {
   String get insuranceProvider => _insuranceProvider ?? '';
   bool hasInsuranceProvider() => _insuranceProvider != null;
 
+  // "title" field.
+  String? _title;
+  String get title => _title ?? '';
+  bool hasTitle() => _title != null;
+
+  // "desc" field.
+  String? _desc;
+  String get desc => _desc ?? '';
+  bool hasDesc() => _desc != null;
+
+  // "display_price" field.
+  String? _displayPrice;
+  String get displayPrice => _displayPrice ?? '';
+  bool hasDisplayPrice() => _displayPrice != null;
+
   void _initializeFields() {
-    _insuranceId = castToType<int>(snapshotData['insurance_id']);
     _userId = snapshotData['user_id'] as DocumentReference?;
     _vehicleId = snapshotData['vehicle_id'] as DocumentReference?;
     _insuranceProvider = snapshotData['insurance_provider'] as String?;
+    _title = snapshotData['title'] as String?;
+    _desc = snapshotData['desc'] as String?;
+    _displayPrice = snapshotData['display_price'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -77,17 +89,21 @@ class InsuranceRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createInsuranceRecordData({
-  int? insuranceId,
   DocumentReference? userId,
   DocumentReference? vehicleId,
   String? insuranceProvider,
+  String? title,
+  String? desc,
+  String? displayPrice,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'insurance_id': insuranceId,
       'user_id': userId,
       'vehicle_id': vehicleId,
       'insurance_provider': insuranceProvider,
+      'title': title,
+      'desc': desc,
+      'display_price': displayPrice,
     }.withoutNulls,
   );
 
@@ -99,15 +115,23 @@ class InsuranceRecordDocumentEquality implements Equality<InsuranceRecord> {
 
   @override
   bool equals(InsuranceRecord? e1, InsuranceRecord? e2) {
-    return e1?.insuranceId == e2?.insuranceId &&
-        e1?.userId == e2?.userId &&
+    return e1?.userId == e2?.userId &&
         e1?.vehicleId == e2?.vehicleId &&
-        e1?.insuranceProvider == e2?.insuranceProvider;
+        e1?.insuranceProvider == e2?.insuranceProvider &&
+        e1?.title == e2?.title &&
+        e1?.desc == e2?.desc &&
+        e1?.displayPrice == e2?.displayPrice;
   }
 
   @override
-  int hash(InsuranceRecord? e) => const ListEquality()
-      .hash([e?.insuranceId, e?.userId, e?.vehicleId, e?.insuranceProvider]);
+  int hash(InsuranceRecord? e) => const ListEquality().hash([
+        e?.userId,
+        e?.vehicleId,
+        e?.insuranceProvider,
+        e?.title,
+        e?.desc,
+        e?.displayPrice
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is InsuranceRecord;

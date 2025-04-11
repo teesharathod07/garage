@@ -49,6 +49,8 @@ class _SoundWidgetState extends State<SoundWidget> {
             'Sound & Vibration',
             style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Inter Tight',
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  fontSize: 28.0,
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -117,27 +119,6 @@ class _SoundWidgetState extends State<SoundWidget> {
                             children: [
                               Text(
                                 'Message Notifications',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                              ),
-                            ],
-                          ),
-                          Divider(
-                            thickness: 1.0,
-                            color: FlutterFlowTheme.of(context).alternate,
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Event Reminders',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

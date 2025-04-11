@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'servicedetail_widget.dart' show ServicedetailWidget;
+import 'admindash_widget.dart' show AdmindashWidget;
 import 'package:flutter/material.dart';
 
-class ServicedetailModel extends FlutterFlowModel<ServicedetailWidget> {
+class AdmindashModel extends FlutterFlowModel<AdmindashWidget> {
   @override
   void initState(BuildContext context) {}
 

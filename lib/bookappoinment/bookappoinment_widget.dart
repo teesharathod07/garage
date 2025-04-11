@@ -1,3 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_checkbox_group.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -9,7 +12,12 @@ import 'bookappoinment_model.dart';
 export 'bookappoinment_model.dart';
 
 class BookappoinmentWidget extends StatefulWidget {
-  const BookappoinmentWidget({super.key});
+  const BookappoinmentWidget({
+    super.key,
+    this.garageref,
+  });
+
+  final DocumentReference? garageref;
 
   static String routeName = 'bookappoinment';
   static String routePath = '/bookappoinment';
@@ -34,13 +42,14 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
     _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
+    _model.textController3 ??=
+        TextEditingController(text: currentUserDisplayName);
     _model.textFieldFocusNode3 ??= FocusNode();
 
-    _model.textController4 ??= TextEditingController();
+    _model.textController4 ??= TextEditingController(text: currentPhoneNumber);
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    _model.textController5 ??= TextEditingController();
+    _model.textController5 ??= TextEditingController(text: currentUserEmail);
     _model.textFieldFocusNode5 ??= FocusNode();
   }
 
@@ -60,7 +69,7 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFF5FBFB),
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: Color(0xFF9489F5),
           iconTheme: IconThemeData(color: Colors.white),
@@ -70,7 +79,7 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
             style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Readex Pro',
                   color: Colors.white,
-                  fontSize: 24.0,
+                  fontSize: 28.0,
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.w600,
                 ),
@@ -95,7 +104,7 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                       'Vehicle Information',
                       style: FlutterFlowTheme.of(context).titleMedium.override(
                             fontFamily: 'Inter',
-                            color: Color(0xFF191919),
+                            color: FlutterFlowTheme.of(context).primaryText,
                             fontSize: 18.0,
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.bold,
@@ -106,7 +115,7 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                     padding: EdgeInsets.all(16.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 4.0,
@@ -128,9 +137,9 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                               controller: _model.dropDownValueController1 ??=
                                   FormFieldController<String>(null),
                               options: [
-                                '2018 Toyota Camry',
-                                '2020 Honda Civic',
-                                '2022 Ford F-150'
+                                'Toyota-Corolla Altis-Sedan',
+                                'Honda-Civic\t-Sedan',
+                                '\tHyunda-i\tCreta\tSUV'
                               ],
                               onChanged: (val) => safeSetState(
                                   () => _model.dropDownValue1 = val),
@@ -156,8 +165,7 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                               borderColor: Color(0xFFDFEDEC),
                               borderWidth: 1.0,
                               borderRadius: 8.0,
-                              margin: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
+                              margin: EdgeInsets.all(8.0),
                               hidesUnderline: true,
                               isSearchable: false,
                               isMultiSelect: false,
@@ -248,7 +256,7 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                       'Service Type',
                       style: FlutterFlowTheme.of(context).titleMedium.override(
                             fontFamily: 'Inter',
-                            color: Color(0xFF0A0A0A),
+                            color: FlutterFlowTheme.of(context).primaryText,
                             fontSize: 18.0,
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.bold,
@@ -259,7 +267,7 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                     padding: EdgeInsets.all(16.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 4.0,
@@ -284,7 +292,8 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                                 'Brake Service',
                                 'Engine Diagnostics',
                                 'Air Filter Replacement',
-                                'Battery Check'
+                                'Battery Check',
+                                'Power Streeing'
                               ],
                               onChanged: (val) => safeSetState(
                                   () => _model.checkboxGroupValues = val),
@@ -300,12 +309,15 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Inter',
-                                    color: Color(0xFF101518),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.normal,
                                   ),
-                              unselectedTextStyle: TextStyle(),
+                              unselectedTextStyle: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
                               checkboxBorderRadius: BorderRadius.circular(4.0),
                               initialized: _model.checkboxGroupValues != null,
                             ),
@@ -435,32 +447,47 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                                   width: 1.0,
                                 ),
                               ),
-                              child: Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Select Date',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            color: Color(0xFF101518),
-                                            fontSize: 14.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.normal,
-                                          ),
+                              child: FlutterFlowCalendar(
+                                color: FlutterFlowTheme.of(context).primary,
+                                iconColor:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                weekFormat: false,
+                                weekStartsMonday: false,
+                                rowHeight: 48.0,
+                                onChange: (DateTimeRange? newSelectedDate) {
+                                  safeSetState(() => _model
+                                      .calendarSelectedDay = newSelectedDate);
+                                },
+                                titleStyle: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Inter Tight',
+                                      letterSpacing: 0.0,
                                     ),
-                                    Icon(
-                                      Icons.calendar_today,
-                                      color: Color(0xFF9489F5),
-                                      size: 24.0,
+                                dayOfWeekStyle: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
                                     ),
-                                  ],
-                                ),
+                                dateStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
+                                selectedDateStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Inter Tight',
+                                      letterSpacing: 0.0,
+                                    ),
+                                inactiveDateStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
                             ),
                             Container(),
@@ -498,8 +525,7 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                               borderColor: Color(0xFFDFEDEC),
                               borderWidth: 1.0,
                               borderRadius: 8.0,
-                              margin: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
+                              margin: EdgeInsets.all(12.0),
                               hidesUnderline: true,
                               isSearchable: false,
                               isMultiSelect: false,
@@ -546,150 +572,154 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Container(
-                              width: double.infinity,
-                              child: TextFormField(
-                                controller: _model.textController3,
-                                focusNode: _model.textFieldFocusNode3,
-                                autofocus: false,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
+                            AuthUserStreamWidget(
+                              builder: (context) => Container(
+                                width: double.infinity,
+                                child: TextFormField(
+                                  controller: _model.textController3,
+                                  focusNode: _model.textFieldFocusNode3,
+                                  autofocus: false,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    labelStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    hintText: 'Full Name',
+                                    hintStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFDFEDEC),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFF06D5CD),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFC4454D),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFC4454D),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    filled: true,
+                                    fillColor: Color(0xFFF5FBFB),
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: Color(0xFF57636C),
+                                        color: Color(0xFF101518),
                                         fontSize: 14.0,
                                         letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.normal,
                                       ),
-                                  hintText: 'Full Name',
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color: Color(0xFF57636C),
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDFEDEC),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFF06D5CD),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFC4454D),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFC4454D),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  filled: true,
-                                  fillColor: Color(0xFFF5FBFB),
+                                  cursorColor: Color(0xFF06D5CD),
+                                  validator: _model.textController3Validator
+                                      .asValidator(context),
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      color: Color(0xFF101518),
-                                      fontSize: 14.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                cursorColor: Color(0xFF06D5CD),
-                                validator: _model.textController3Validator
-                                    .asValidator(context),
                               ),
                             ),
                             Container(),
-                            Container(
-                              width: double.infinity,
-                              child: TextFormField(
-                                controller: _model.textController4,
-                                focusNode: _model.textFieldFocusNode4,
-                                autofocus: false,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
+                            AuthUserStreamWidget(
+                              builder: (context) => Container(
+                                width: double.infinity,
+                                child: TextFormField(
+                                  controller: _model.textController4,
+                                  focusNode: _model.textFieldFocusNode4,
+                                  autofocus: false,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    labelStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    hintText: 'Phone Number',
+                                    hintStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFDFEDEC),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFF06D5CD),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFC4454D),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFC4454D),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    filled: true,
+                                    fillColor: Color(0xFFF5FBFB),
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: Color(0xFF57636C),
+                                        color: Color(0xFF101518),
                                         fontSize: 14.0,
                                         letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.normal,
                                       ),
-                                  hintText: 'Phone Number',
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color: Color(0xFF57636C),
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDFEDEC),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFF06D5CD),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFC4454D),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFC4454D),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  filled: true,
-                                  fillColor: Color(0xFFF5FBFB),
+                                  keyboardType: TextInputType.phone,
+                                  cursorColor: Color(0xFF06D5CD),
+                                  validator: _model.textController4Validator
+                                      .asValidator(context),
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      color: Color(0xFF101518),
-                                      fontSize: 14.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                keyboardType: TextInputType.phone,
-                                cursorColor: Color(0xFF06D5CD),
-                                validator: _model.textController4Validator
-                                    .asValidator(context),
                               ),
                             ),
                             Container(),
@@ -776,8 +806,35 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
                     child: FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        await BookingDetailsRecord.collection.doc().set({
+                          ...createBookingDetailsRecordData(
+                            userId: currentUserReference,
+                            bookingStatus: 'Pending',
+                            bookingDateTime: _model.calendarSelectedDay?.start,
+                            vehicle: _model.dropDownValue1,
+                            bookingTime: _model.dropDownValue2,
+                            additionalservice: _model.textController2.text,
+                          ),
+                          ...mapToFirestore(
+                            {
+                              'services': _model.checkboxGroupValues,
+                            },
+                          ),
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Successfully booked an appointment.',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
                       },
                       text: 'Schedule Appointment',
                       options: FFButtonOptions(
@@ -800,7 +857,7 @@ class _BookappoinmentWidgetState extends State<BookappoinmentWidget> {
                           color: Colors.transparent,
                           width: 1.0,
                         ),
-                        borderRadius: BorderRadius.circular(30.0),
+                        borderRadius: BorderRadius.circular(0.0),
                       ),
                     ),
                   ),

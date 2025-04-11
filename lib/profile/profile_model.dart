@@ -26,14 +26,15 @@ class ProfileModel extends FlutterFlowModel<ProfileWidget> {
   bool? switchValue3;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode4;
-  TextEditingController? textController4;
+  TextEditingController? passwordTextController;
   late bool passwordVisibility1;
-  String? Function(BuildContext, String?)? textController4Validator;
+  String? Function(BuildContext, String?)? passwordTextControllerValidator;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode5;
-  TextEditingController? textController5;
+  TextEditingController? confirmPasswordTextController;
   late bool passwordVisibility2;
-  String? Function(BuildContext, String?)? textController5Validator;
+  String? Function(BuildContext, String?)?
+      confirmPasswordTextControllerValidator;
 
   @override
   void initState(BuildContext context) {
@@ -53,9 +54,9 @@ class ProfileModel extends FlutterFlowModel<ProfileWidget> {
     textController3?.dispose();
 
     textFieldFocusNode4?.dispose();
-    textController4?.dispose();
+    passwordTextController?.dispose();
 
     textFieldFocusNode5?.dispose();
-    textController5?.dispose();
+    confirmPasswordTextController?.dispose();
   }
 }

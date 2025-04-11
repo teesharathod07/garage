@@ -16,20 +16,10 @@ class GarageRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "garage_id" field.
-  int? _garageId;
-  int get garageId => _garageId ?? 0;
-  bool hasGarageId() => _garageId != null;
-
   // "garage_name" field.
   String? _garageName;
   String get garageName => _garageName ?? '';
   bool hasGarageName() => _garageName != null;
-
-  // "owner_id" field.
-  DocumentReference? _ownerId;
-  DocumentReference? get ownerId => _ownerId;
-  bool hasOwnerId() => _ownerId != null;
 
   // "location" field.
   String? _location;
@@ -66,10 +56,13 @@ class GarageRecord extends FirestoreRecord {
   String get status => _status ?? '';
   bool hasStatus() => _status != null;
 
+  // "desc" field.
+  String? _desc;
+  String get desc => _desc ?? '';
+  bool hasDesc() => _desc != null;
+
   void _initializeFields() {
-    _garageId = castToType<int>(snapshotData['garage_id']);
     _garageName = snapshotData['garage_name'] as String?;
-    _ownerId = snapshotData['owner_id'] as DocumentReference?;
     _location = snapshotData['location'] as String?;
     _serviceOfferd = getDataList(snapshotData['service_offerd']);
     _rating = castToType<int>(snapshotData['rating']);
@@ -77,6 +70,7 @@ class GarageRecord extends FirestoreRecord {
     _openingtime = snapshotData['openingtime'] as DateTime?;
     _closingtime = snapshotData['closingtime'] as DateTime?;
     _status = snapshotData['status'] as String?;
+    _desc = snapshotData['desc'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -113,27 +107,25 @@ class GarageRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createGarageRecordData({
-  int? garageId,
   String? garageName,
-  DocumentReference? ownerId,
   String? location,
   int? rating,
   int? phoneNumber,
   DateTime? openingtime,
   DateTime? closingtime,
   String? status,
+  String? desc,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'garage_id': garageId,
       'garage_name': garageName,
-      'owner_id': ownerId,
       'location': location,
       'rating': rating,
       'phone_number': phoneNumber,
       'openingtime': openingtime,
       'closingtime': closingtime,
       'status': status,
+      'desc': desc,
     }.withoutNulls,
   );
 
@@ -146,30 +138,28 @@ class GarageRecordDocumentEquality implements Equality<GarageRecord> {
   @override
   bool equals(GarageRecord? e1, GarageRecord? e2) {
     const listEquality = ListEquality();
-    return e1?.garageId == e2?.garageId &&
-        e1?.garageName == e2?.garageName &&
-        e1?.ownerId == e2?.ownerId &&
+    return e1?.garageName == e2?.garageName &&
         e1?.location == e2?.location &&
         listEquality.equals(e1?.serviceOfferd, e2?.serviceOfferd) &&
         e1?.rating == e2?.rating &&
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.openingtime == e2?.openingtime &&
         e1?.closingtime == e2?.closingtime &&
-        e1?.status == e2?.status;
+        e1?.status == e2?.status &&
+        e1?.desc == e2?.desc;
   }
 
   @override
   int hash(GarageRecord? e) => const ListEquality().hash([
-        e?.garageId,
         e?.garageName,
-        e?.ownerId,
         e?.location,
         e?.serviceOfferd,
         e?.rating,
         e?.phoneNumber,
         e?.openingtime,
         e?.closingtime,
-        e?.status
+        e?.status,
+        e?.desc
       ]);
 
   @override

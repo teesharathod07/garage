@@ -1,3 +1,4 @@
+import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'bookappoinment_widget.dart' show BookappoinmentWidget;
@@ -23,6 +24,8 @@ class BookappoinmentModel extends FlutterFlowModel<BookappoinmentWidget> {
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
+  // State field(s) for Calendar widget.
+  DateTimeRange? calendarSelectedDay;
   // State field(s) for DropDown widget.
   String? dropDownValue2;
   FormFieldController<String>? dropDownValueController2;
@@ -40,7 +43,12 @@ class BookappoinmentModel extends FlutterFlowModel<BookappoinmentWidget> {
   String? Function(BuildContext, String?)? textController5Validator;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    calendarSelectedDay = DateTimeRange(
+      start: DateTime.now().startOfDay,
+      end: DateTime.now().endOfDay,
+    );
+  }
 
   @override
   void dispose() {

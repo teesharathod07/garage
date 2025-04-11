@@ -83,7 +83,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 310.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed(QuetionWidget.routeName);
+                        context.pushNamed(QuestionWidget.routeName);
                       },
                       text: 'Let\'s Go',
                       options: FFButtonOptions(

@@ -15,16 +15,6 @@ class ServiceRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "service_id" field.
-  int? _serviceId;
-  int get serviceId => _serviceId ?? 0;
-  bool hasServiceId() => _serviceId != null;
-
-  // "garage_id" field.
-  DocumentReference? _garageId;
-  DocumentReference? get garageId => _garageId;
-  bool hasGarageId() => _garageId != null;
-
   // "service_name" field.
   String? _serviceName;
   String get serviceName => _serviceName ?? '';
@@ -46,8 +36,6 @@ class ServiceRecord extends FirestoreRecord {
   bool hasAvailabilityStatus() => _availabilityStatus != null;
 
   void _initializeFields() {
-    _serviceId = castToType<int>(snapshotData['service_id']);
-    _garageId = snapshotData['garage_id'] as DocumentReference?;
     _serviceName = snapshotData['service_name'] as String?;
     _description = snapshotData['description'] as String?;
     _price = castToType<int>(snapshotData['price']);
@@ -89,8 +77,6 @@ class ServiceRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createServiceRecordData({
-  int? serviceId,
-  DocumentReference? garageId,
   String? serviceName,
   String? description,
   int? price,
@@ -98,8 +84,6 @@ Map<String, dynamic> createServiceRecordData({
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'service_id': serviceId,
-      'garage_id': garageId,
       'service_name': serviceName,
       'description': description,
       'price': price,
@@ -115,23 +99,15 @@ class ServiceRecordDocumentEquality implements Equality<ServiceRecord> {
 
   @override
   bool equals(ServiceRecord? e1, ServiceRecord? e2) {
-    return e1?.serviceId == e2?.serviceId &&
-        e1?.garageId == e2?.garageId &&
-        e1?.serviceName == e2?.serviceName &&
+    return e1?.serviceName == e2?.serviceName &&
         e1?.description == e2?.description &&
         e1?.price == e2?.price &&
         e1?.availabilityStatus == e2?.availabilityStatus;
   }
 
   @override
-  int hash(ServiceRecord? e) => const ListEquality().hash([
-        e?.serviceId,
-        e?.garageId,
-        e?.serviceName,
-        e?.description,
-        e?.price,
-        e?.availabilityStatus
-      ]);
+  int hash(ServiceRecord? e) => const ListEquality()
+      .hash([e?.serviceName, e?.description, e?.price, e?.availabilityStatus]);
 
   @override
   bool isValidKey(Object? o) => o is ServiceRecord;

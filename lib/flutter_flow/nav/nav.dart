@@ -76,14 +76,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? SignuppageWidget() : SplashpageWidget(),
+          appStateNotifier.loggedIn ? UserdashWidget() : SplashpageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? SignuppageWidget()
-              : SplashpageWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? UserdashWidget() : SplashpageWidget(),
         ),
         FFRoute(
           name: SplashpageWidget.routeName,
@@ -111,9 +110,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => WelcomepageWidget(),
         ),
         FFRoute(
-          name: QuetionWidget.routeName,
-          path: QuetionWidget.routePath,
-          builder: (context, params) => QuetionWidget(),
+          name: QuestionWidget.routeName,
+          path: QuestionWidget.routePath,
+          builder: (context, params) => QuestionWidget(),
         ),
         FFRoute(
           name: ForgotpasswordWidget.routeName,
@@ -131,14 +130,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => NearbygaragesWidget(),
         ),
         FFRoute(
-          name: ServicedetailWidget.routeName,
-          path: ServicedetailWidget.routePath,
-          builder: (context, params) => ServicedetailWidget(),
-        ),
-        FFRoute(
           name: BookappoinmentWidget.routeName,
           path: BookappoinmentWidget.routePath,
-          builder: (context, params) => BookappoinmentWidget(),
+          builder: (context, params) => BookappoinmentWidget(
+            garageref: params.getParam(
+              'garageref',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['garage'],
+            ),
+          ),
         ),
         FFRoute(
           name: InsuranceWidget.routeName,
@@ -179,6 +180,76 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: SoundWidget.routeName,
           path: SoundWidget.routePath,
           builder: (context, params) => SoundWidget(),
+        ),
+        FFRoute(
+          name: HealthInsuranceWidget.routeName,
+          path: HealthInsuranceWidget.routePath,
+          builder: (context, params) => HealthInsuranceWidget(),
+        ),
+        FFRoute(
+          name: AutoInsuranceWidget.routeName,
+          path: AutoInsuranceWidget.routePath,
+          builder: (context, params) => AutoInsuranceWidget(),
+        ),
+        FFRoute(
+          name: HomeInsuranceWidget.routeName,
+          path: HomeInsuranceWidget.routePath,
+          builder: (context, params) => HomeInsuranceWidget(),
+        ),
+        FFRoute(
+          name: LifeinsuranceWidget.routeName,
+          path: LifeinsuranceWidget.routePath,
+          builder: (context, params) => LifeinsuranceWidget(),
+        ),
+        FFRoute(
+          name: PremiumHealthplaWidget.routeName,
+          path: PremiumHealthplaWidget.routePath,
+          builder: (context, params) => PremiumHealthplaWidget(),
+        ),
+        FFRoute(
+          name: FullcoverageautoWidget.routeName,
+          path: FullcoverageautoWidget.routePath,
+          builder: (context, params) => FullcoverageautoWidget(),
+        ),
+        FFRoute(
+          name: HomeprotectionWidget.routeName,
+          path: HomeprotectionWidget.routePath,
+          builder: (context, params) => HomeprotectionWidget(),
+        ),
+        FFRoute(
+          name: AdminpanelappWidget.routeName,
+          path: AdminpanelappWidget.routePath,
+          builder: (context, params) => AdminpanelappWidget(),
+        ),
+        FFRoute(
+          name: AddgarageWidget.routeName,
+          path: AddgarageWidget.routePath,
+          builder: (context, params) => AddgarageWidget(),
+        ),
+        FFRoute(
+          name: AdmindashWidget.routeName,
+          path: AdmindashWidget.routePath,
+          builder: (context, params) => AdmindashWidget(),
+        ),
+        FFRoute(
+          name: UsersWidget.routeName,
+          path: UsersWidget.routePath,
+          builder: (context, params) => UsersWidget(),
+        ),
+        FFRoute(
+          name: AddServiceWidget.routeName,
+          path: AddServiceWidget.routePath,
+          builder: (context, params) => AddServiceWidget(),
+        ),
+        FFRoute(
+          name: VehicleInformationWidget.routeName,
+          path: VehicleInformationWidget.routePath,
+          builder: (context, params) => VehicleInformationWidget(),
+        ),
+        FFRoute(
+          name: SdWidget.routeName,
+          path: SdWidget.routePath,
+          builder: (context, params) => SdWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

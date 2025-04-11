@@ -1,8 +1,12 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'userdash_model.dart';
 export 'userdash_model.dart';
 
@@ -25,6 +29,26 @@ class _UserdashWidgetState extends State<UserdashWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => UserdashModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.admin = await queryAppsettingsRecordOnce(
+        singleRecord: true,
+      ).then((s) => s.firstOrNull);
+      if (_model.admin!.admin.contains(currentUserEmail)) {
+        await currentUserReference!.update(createUsersRecordData(
+          type: 'Admin',
+        ));
+
+        context.goNamed(AdmindashWidget.routeName);
+
+        return;
+      } else {
+        context.goNamed(UserdashWidget.routeName);
+
+        return;
+      }
+    });
   }
 
   @override
@@ -43,7 +67,7 @@ class _UserdashWidgetState extends State<UserdashWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFF5FBFB),
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -52,7 +76,7 @@ class _UserdashWidgetState extends State<UserdashWidget> {
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
                 ),
                 child: Padding(
                   padding: EdgeInsets.all(12.0),
@@ -71,7 +95,8 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                                 .headlineSmall
                                 .override(
                                   fontFamily: 'Readex Pro',
-                                  color: Color(0xFF101518),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 24.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.bold,
@@ -111,7 +136,7 @@ class _UserdashWidgetState extends State<UserdashWidget> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 80.0),
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 0.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -121,14 +146,15 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
                         child: Text(
                           'Our Services',
-                          style:
-                              FlutterFlowTheme.of(context).titleMedium.override(
-                                    fontFamily: 'Inter',
-                                    color: Color(0xFF090909),
-                                    fontSize: 18.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .titleMedium
+                              .override(
+                                fontFamily: 'Inter',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 18.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                       ),
                       GridView(
@@ -137,7 +163,20 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                           crossAxisCount: 2,
                           crossAxisSpacing: 12.0,
                           mainAxisSpacing: 12.0,
-                          childAspectRatio: 1.0,
+                          childAspectRatio: () {
+                            if (MediaQuery.sizeOf(context).width <
+                                kBreakpointSmall) {
+                              return 0.8;
+                            } else if (MediaQuery.sizeOf(context).width <
+                                kBreakpointMedium) {
+                              return 4.0;
+                            } else if (MediaQuery.sizeOf(context).width <
+                                kBreakpointLarge) {
+                              return 4.0;
+                            } else {
+                              return 4.0;
+                            }
+                          }(),
                         ),
                         primary: false,
                         shrinkWrap: true,
@@ -231,7 +270,7 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.pushNamed(ServicedetailWidget.routeName);
+                              context.pushNamed(SdWidget.routeName);
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -411,7 +450,7 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                                 ],
                                 gradient: LinearGradient(
                                   colors: [
-                                    Color(0xFF16857B),
+                                    Color(0x4DEE8B60),
                                     Color(0x4C249689)
                                   ],
                                   stops: [0.0, 1.0],
@@ -478,7 +517,8 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 4.0,
@@ -507,7 +547,8 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                                           .titleMedium
                                           .override(
                                             fontFamily: 'Inter',
-                                            color: Color(0xFF181717),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             fontSize: 18.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
@@ -565,7 +606,7 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                                             .titleSmall
                                             .override(
                                               fontFamily: 'Inter',
-                                              color: Colors.white,
+                                              color: Color(0xFF0F0E0E),
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
@@ -629,8 +670,9 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Inter',
-                                                          color:
-                                                              Color(0xFF101518),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
                                                           fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -704,8 +746,9 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Inter',
-                                                          color:
-                                                              Color(0xFF101518),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
                                                           fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -744,7 +787,8 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 4.0,
@@ -773,7 +817,8 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                                           .titleMedium
                                           .override(
                                             fontFamily: 'Inter',
-                                            color: Color(0xFF191818),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             fontSize: 18.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
@@ -821,7 +866,9 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         color:
-                                                            Color(0xFF101518),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                         fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
@@ -831,7 +878,9 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                                               ),
                                               Icon(
                                                 Icons.keyboard_arrow_down,
-                                                color: Color(0xFF101518),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
                                                 size: 24.0,
                                               ),
                                             ],
@@ -884,7 +933,9 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         color:
-                                                            Color(0xFF101518),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                         fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
@@ -894,7 +945,9 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                                               ),
                                               Icon(
                                                 Icons.keyboard_arrow_down,
-                                                color: Color(0xFF101518),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
                                                 size: 24.0,
                                               ),
                                             ],
@@ -920,7 +973,7 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                 width: double.infinity,
                 height: 80.0,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 8.0,
@@ -949,14 +1002,16 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                           ),
                           Text(
                             'Home',
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
-                                      fontFamily: 'Inter',
-                                      color: Color(0xFF131313),
-                                      fontSize: 12.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodySmall
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 12.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
                           ),
                         ],
                       ),
@@ -980,14 +1035,16 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                           ),
                           Text(
                             'Profile',
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
-                                      fontFamily: 'Inter',
-                                      color: Color(0xFF131313),
-                                      fontSize: 12.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodySmall
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 12.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
                           ),
                         ],
                       ),
@@ -1011,14 +1068,16 @@ class _UserdashWidgetState extends State<UserdashWidget> {
                           ),
                           Text(
                             'Settings',
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
-                                      fontFamily: 'Inter',
-                                      color: Color(0xFF131313),
-                                      fontSize: 12.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodySmall
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 12.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
                           ),
                         ],
                       ),

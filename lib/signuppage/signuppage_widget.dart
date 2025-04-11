@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'signuppage_model.dart';
 export 'signuppage_model.dart';
@@ -57,7 +58,7 @@ class _SignuppageWidgetState extends State<SignuppageWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFF1F4F8),
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Column(
@@ -80,7 +81,7 @@ class _SignuppageWidgetState extends State<SignuppageWidget> {
                               .headlineLarge
                               .override(
                                 fontFamily: 'Urbanist',
-                                color: Color(0xFF101213),
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 fontSize: 32.0,
                                 letterSpacing: 0.0,
                                 fontWeight: FontWeight.bold,
@@ -92,14 +93,15 @@ class _SignuppageWidgetState extends State<SignuppageWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                         child: Text(
                           'Sign up to get started with our app',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Manrope',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: 'Manrope',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 14.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.normal,
+                              ),
                         ),
                       ),
                       Form(
@@ -453,7 +455,8 @@ class _SignuppageWidgetState extends State<SignuppageWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
-                                            color: Colors.black,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -466,37 +469,68 @@ class _SignuppageWidgetState extends State<SignuppageWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          GoRouter.of(context).prepareAuthEvent();
-                          if (_model.passwordTextController.text !=
-                              _model.confirmPasswordTextController.text) {
+                          if (_model.checkboxValue!) {
+                            GoRouter.of(context).prepareAuthEvent();
+                            if (_model.passwordTextController.text !=
+                                _model.confirmPasswordTextController.text) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Passwords don\'t match!',
+                                  ),
+                                ),
+                              );
+                              return;
+                            }
+
+                            final user =
+                                await authManager.createAccountWithEmail(
+                              context,
+                              _model.emailTextController.text,
+                              _model.passwordTextController.text,
+                            );
+                            if (user == null) {
+                              return;
+                            }
+
+                            await UsersRecord.collection
+                                .doc(user.uid)
+                                .update(createUsersRecordData(
+                                  email: _model.emailTextController.text,
+                                  displayName: _model.textController1.text,
+                                ));
+
+                            _model.admin = await queryAppsettingsRecordOnce(
+                              singleRecord: true,
+                            ).then((s) => s.firstOrNull);
+                            if (_model.admin!.admin
+                                .contains(currentUserEmail)) {
+                              await currentUserReference!
+                                  .update(createUsersRecordData(
+                                type: 'Admin',
+                              ));
+                            }
+
+                            context.goNamedAuth(
+                                SigninpageWidget.routeName, context.mounted);
+                          } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Passwords don\'t match!',
+                                  'Can not proceed without agreeing to terms and conditions.',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
                                 ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).secondary,
                               ),
                             );
-                            return;
                           }
 
-                          final user = await authManager.createAccountWithEmail(
-                            context,
-                            _model.emailTextController.text,
-                            _model.passwordTextController.text,
-                          );
-                          if (user == null) {
-                            return;
-                          }
-
-                          await UsersRecord.collection
-                              .doc(user.uid)
-                              .update(createUsersRecordData(
-                                email: _model.emailTextController.text,
-                                displayName: _model.textController1.text,
-                              ));
-
-                          context.pushNamedAuth(
-                              SigninpageWidget.routeName, context.mounted);
+                          safeSetState(() {});
                         },
                         text: 'Sign Up',
                         options: FFButtonOptions(

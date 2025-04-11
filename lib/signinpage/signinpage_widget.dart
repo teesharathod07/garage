@@ -1,8 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'signinpage_model.dart';
 export 'signinpage_model.dart';
@@ -50,7 +52,7 @@ class _SigninpageWidgetState extends State<SigninpageWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFF1F4F8),
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Align(
@@ -76,7 +78,8 @@ class _SigninpageWidgetState extends State<SigninpageWidget> {
                                 .headlineMedium
                                 .override(
                                   fontFamily: 'Urbanist',
-                                  color: Color(0xFF101213),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 28.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.bold,
@@ -93,7 +96,8 @@ class _SigninpageWidgetState extends State<SigninpageWidget> {
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Manrope',
-                                  color: Color(0xFF57636C),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 14.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.normal,
@@ -242,6 +246,7 @@ class _SigninpageWidgetState extends State<SigninpageWidget> {
                                         _model.passwordVisibility
                                             ? Icons.visibility_outlined
                                             : Icons.visibility_off_outlined,
+                                        color: Colors.black,
                                         size: 22,
                                       ),
                                     ),
@@ -287,6 +292,7 @@ class _SigninpageWidgetState extends State<SigninpageWidget> {
                                 alignment: AlignmentDirectional(0.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    var _shouldSetState = false;
                                     if (_model.formKey.currentState == null ||
                                         !_model.formKey.currentState!
                                             .validate()) {
@@ -304,9 +310,34 @@ class _SigninpageWidgetState extends State<SigninpageWidget> {
                                       return;
                                     }
 
-                                    context.pushNamedAuth(
-                                        UserdashWidget.routeName,
-                                        context.mounted);
+                                    _model.admin =
+                                        await queryAppsettingsRecordOnce(
+                                      singleRecord: true,
+                                    ).then((s) => s.firstOrNull);
+                                    _shouldSetState = true;
+                                    if (_model.admin!.admin
+                                        .contains(currentUserEmail)) {
+                                      await currentUserReference!
+                                          .update(createUsersRecordData(
+                                        type: 'Admin',
+                                      ));
+
+                                      context.goNamedAuth(
+                                          AdmindashWidget.routeName,
+                                          context.mounted);
+
+                                      if (_shouldSetState) safeSetState(() {});
+                                      return;
+                                    } else {
+                                      context.goNamedAuth(
+                                          UserdashWidget.routeName,
+                                          context.mounted);
+
+                                      if (_shouldSetState) safeSetState(() {});
+                                      return;
+                                    }
+
+                                    if (_shouldSetState) safeSetState(() {});
                                   },
                                   text: 'Sign In',
                                   options: FFButtonOptions(

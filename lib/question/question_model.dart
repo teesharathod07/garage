@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'quetion_widget.dart' show QuetionWidget;
+import 'question_widget.dart' show QuestionWidget;
 import 'package:flutter/material.dart';
 
-class QuetionModel extends FlutterFlowModel<QuetionWidget> {
+class QuestionModel extends FlutterFlowModel<QuestionWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for Checkbox widget.

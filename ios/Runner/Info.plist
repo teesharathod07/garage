@@ -54,6 +54,10 @@
 	<true/>
 
 
+	<key>PermissionGroupNotification</key>
+    <string>Enable notifications.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>Enable location services.</string>
 
 
 

@@ -44,7 +44,7 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: Color(0xFF9489F5),
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -53,7 +53,7 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
           buttonSize: 60.0,
           icon: Icon(
             Icons.arrow_back_rounded,
-            color: FlutterFlowTheme.of(context).primaryText,
+            color: FlutterFlowTheme.of(context).primaryBackground,
             size: 30.0,
           ),
           onPressed: () async {
@@ -66,7 +66,8 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
             'Back',
             style: FlutterFlowTheme.of(context).displaySmall.override(
                   fontFamily: 'Inter Tight',
-                  fontSize: 16.0,
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  fontSize: 28.0,
                   letterSpacing: 0.0,
                 ),
           ),

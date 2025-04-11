@@ -51,12 +51,14 @@ class _PrivacyWidgetState extends State<PrivacyWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          backgroundColor: Color(0xFF9489F5),
           automaticallyImplyLeading: true,
           title: Text(
             'Privacy & Security',
             style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Inter Tight',
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  fontSize: 28.0,
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -559,163 +561,6 @@ class _PrivacyWidgetState extends State<PrivacyWidget> {
                         )
                       ],
                       borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 12.0),
-                            child: Text(
-                              'Privacy Policies',
-                              style: FlutterFlowTheme.of(context)
-                                  .titleMedium
-                                  .override(
-                                    fontFamily: 'Inter Tight',
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                          ),
-                          Material(
-                            color: Colors.transparent,
-                            child: ListTile(
-                              title: Text(
-                                'Privacy Policy',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                              dense: false,
-                            ),
-                          ),
-                          Material(
-                            color: Colors.transparent,
-                            child: ListTile(
-                              title: Text(
-                                'Terms of Service',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                              dense: false,
-                            ),
-                          ),
-                          Material(
-                            color: Colors.transparent,
-                            child: ListTile(
-                              title: Text(
-                                'Data Usage',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                              dense: false,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF9489F5),
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 4.0,
-                          color: Color(0x0D000000),
-                          offset: Offset(
-                            0.0,
-                            2.0,
-                          ),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 12.0),
-                            child: Text(
-                              'Account Actions',
-                              style: FlutterFlowTheme.of(context)
-                                  .titleMedium
-                                  .override(
-                                    fontFamily: 'Inter Tight',
-                                    color: FlutterFlowTheme.of(context).info,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                          ),
-                          Material(
-                            color: Colors.transparent,
-                            child: ListTile(
-                              title: Text(
-                                'Download Your Data',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      color: FlutterFlowTheme.of(context).info,
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                              dense: false,
-                            ),
-                          ),
-                          Material(
-                            color: Colors.transparent,
-                            child: ListTile(
-                              title: Text(
-                                'Deactivate Account',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      color: FlutterFlowTheme.of(context).info,
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                              dense: false,
-                            ),
-                          ),
-                          Material(
-                            color: Colors.transparent,
-                            child: ListTile(
-                              title: Text(
-                                'Delete Account',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      color: FlutterFlowTheme.of(context).info,
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                              dense: false,
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                 ]

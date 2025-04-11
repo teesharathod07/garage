@@ -3,28 +3,28 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
-import 'quetion_model.dart';
-export 'quetion_model.dart';
+import 'question_model.dart';
+export 'question_model.dart';
 
-class QuetionWidget extends StatefulWidget {
-  const QuetionWidget({super.key});
+class QuestionWidget extends StatefulWidget {
+  const QuestionWidget({super.key});
 
-  static String routeName = 'quetion';
-  static String routePath = '/quetion';
+  static String routeName = 'question';
+  static String routePath = '/question';
 
   @override
-  State<QuetionWidget> createState() => _QuetionWidgetState();
+  State<QuestionWidget> createState() => _QuestionWidgetState();
 }
 
-class _QuetionWidgetState extends State<QuetionWidget> {
-  late QuetionModel _model;
+class _QuestionWidgetState extends State<QuestionWidget> {
+  late QuestionModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => QuetionModel());
+    _model = createModel(context, () => QuestionModel());
   }
 
   @override

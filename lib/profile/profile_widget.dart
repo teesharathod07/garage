@@ -1,9 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/index.dart';
+import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'profile_model.dart';
 export 'profile_model.dart';
@@ -41,10 +42,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     _model.switchValue1 = true;
     _model.switchValue2 = false;
     _model.switchValue3 = true;
-    _model.textController4 ??= TextEditingController();
+    _model.passwordTextController ??= TextEditingController();
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    _model.textController5 ??= TextEditingController();
+    _model.confirmPasswordTextController ??= TextEditingController();
     _model.textFieldFocusNode5 ??= FocusNode();
   }
 
@@ -64,9 +65,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFF5FBFB),
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Color(0xFFF5FBFB),
+          backgroundColor: Color(0xFF9489F5),
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
@@ -74,19 +75,19 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             buttonSize: 40.0,
             icon: Icon(
               Icons.arrow_back_rounded,
-              color: Color(0xFF101518),
+              color: FlutterFlowTheme.of(context).secondaryBackground,
               size: 24.0,
             ),
             onPressed: () async {
-              context.pushNamed(UserdashWidget.routeName);
+              context.safePop();
             },
           ),
           title: Text(
             'Manage Profile',
             style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Readex Pro',
-                  color: Color(0xFF101518),
-                  fontSize: 24.0,
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  fontSize: 28.0,
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -107,7 +108,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           boxShadow: [
                             BoxShadow(
                               blurRadius: 4.0,
@@ -145,7 +146,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       .titleLarge
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: Color(0xFF101518),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                         fontSize: 22.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
@@ -159,7 +161,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Inter',
-                                      color: Color(0xFF57636C),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       fontSize: 14.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
@@ -171,7 +174,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           boxShadow: [
                             BoxShadow(
                               blurRadius: 4.0,
@@ -195,7 +198,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     .titleMedium
                                     .override(
                                       fontFamily: 'Inter',
-                                      color: Colors.white,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       fontSize: 18.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
@@ -496,7 +500,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           boxShadow: [
                             BoxShadow(
                               blurRadius: 4.0,
@@ -520,7 +524,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     .titleMedium
                                     .override(
                                       fontFamily: 'Inter',
-                                      color: Colors.white,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       fontSize: 18.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
@@ -542,7 +547,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Inter',
-                                              color: Color(0xFF101518),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               fontSize: 14.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.normal,
@@ -553,6 +560,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         onChanged: (newValue) async {
                                           safeSetState(() =>
                                               _model.switchValue1 = newValue);
+                                          if (newValue) {
+                                            await requestPermission(
+                                                notificationsPermission);
+                                          }
                                         },
                                         activeColor: Colors.white,
                                         activeTrackColor: Color(0xFF9489F5),
@@ -574,7 +585,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Inter',
-                                              color: Color(0xFF101518),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               fontSize: 14.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.normal,
@@ -585,6 +598,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         onChanged: (newValue) async {
                                           safeSetState(() =>
                                               _model.switchValue2 = newValue);
+                                          if (newValue) {
+                                            setDarkModeSetting(
+                                                context, ThemeMode.dark);
+                                          } else {
+                                            setDarkModeSetting(
+                                                context, ThemeMode.light);
+                                          }
                                         },
                                         activeColor: Colors.white,
                                         activeTrackColor: Color(0xFF06D5CD),
@@ -606,7 +626,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Inter',
-                                              color: Color(0xFF101518),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               fontSize: 14.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.normal,
@@ -617,6 +639,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         onChanged: (newValue) async {
                                           safeSetState(() =>
                                               _model.switchValue3 = newValue);
+                                          if (newValue) {
+                                            await requestPermission(
+                                                locationPermission);
+                                          }
                                         },
                                         activeColor: Colors.white,
                                         activeTrackColor: Color(0xFF9489F5),
@@ -633,7 +659,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           boxShadow: [
                             BoxShadow(
                               blurRadius: 4.0,
@@ -657,7 +683,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     .titleMedium
                                     .override(
                                       fontFamily: 'Inter',
-                                      color: Colors.white,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       fontSize: 18.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
@@ -686,7 +713,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       Container(
                                         width: double.infinity,
                                         child: TextFormField(
-                                          controller: _model.textController4,
+                                          controller:
+                                              _model.passwordTextController,
                                           focusNode: _model.textFieldFocusNode4,
                                           autofocus: false,
                                           obscureText:
@@ -752,6 +780,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                     ? Icons.visibility_outlined
                                                     : Icons
                                                         .visibility_off_outlined,
+                                                color: Colors.black,
                                                 size: 22,
                                               ),
                                             ),
@@ -767,7 +796,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               ),
                                           cursorColor: Color(0xFF101518),
                                           validator: _model
-                                              .textController4Validator
+                                              .passwordTextControllerValidator
                                               .asValidator(context),
                                         ),
                                       ),
@@ -793,7 +822,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       Container(
                                         width: double.infinity,
                                         child: TextFormField(
-                                          controller: _model.textController5,
+                                          controller: _model
+                                              .confirmPasswordTextController,
                                           focusNode: _model.textFieldFocusNode5,
                                           autofocus: false,
                                           obscureText:
@@ -859,6 +889,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                     ? Icons.visibility_outlined
                                                     : Icons
                                                         .visibility_off_outlined,
+                                                color: Colors.black,
                                                 size: 22,
                                               ),
                                             ),
@@ -874,7 +905,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               ),
                                           cursorColor: Color(0xFF101518),
                                           validator: _model
-                                              .textController5Validator
+                                              .confirmPasswordTextControllerValidator
                                               .asValidator(context),
                                         ),
                                       ),
@@ -909,11 +940,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           padding: EdgeInsets.all(8.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: Color(0xFFDFEDEC),
+                          color: Color(0xFF9489F5),
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Inter',
-                                    color: Color(0xFF101518),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
@@ -925,8 +957,34 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                     Expanded(
                       child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
+                        onPressed: () async {
+                          await currentUserReference!
+                              .update(createUsersRecordData(
+                            email: _model.textController2.text,
+                            displayName: _model.textController1.text,
+                            phoneNumber: _model.textController3.text,
+                          ));
+                          await authManager.updatePassword(
+                            newPassword: _model.passwordTextController.text,
+                            context: context,
+                          );
+                          safeSetState(() {});
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Updated successfully.',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                            ),
+                          );
+                          context.safePop();
                         },
                         text: 'Save Changes',
                         options: FFButtonOptions(

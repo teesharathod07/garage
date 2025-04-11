@@ -48,12 +48,14 @@ class _LanguagesWidgetState extends State<LanguagesWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          backgroundColor: Color(0xFF9489F5),
           automaticallyImplyLeading: true,
           title: Text(
             'Language Settings',
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: 'Inter Tight',
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  fontSize: 28.0,
                   letterSpacing: 0.0,
                 ),
           ),

@@ -43,7 +43,7 @@ class _SplashpageWidgetState extends State<SplashpageWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFF1F4F8),
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Align(
@@ -129,7 +129,7 @@ class _SplashpageWidgetState extends State<SplashpageWidget> {
                   child: FFButtonWidget(
                     onPressed: () async {
                       context.pushNamed(
-                        Greet1Widget.routeName,
+                        WelcomepageWidget.routeName,
                         extra: <String, dynamic>{
                           kTransitionInfoKey: TransitionInfo(
                             hasTransition: true,

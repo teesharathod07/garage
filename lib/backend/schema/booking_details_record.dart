@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -15,26 +16,6 @@ class BookingDetailsRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "booking_id" field.
-  int? _bookingId;
-  int get bookingId => _bookingId ?? 0;
-  bool hasBookingId() => _bookingId != null;
-
-  // "user_id" field.
-  DocumentReference? _userId;
-  DocumentReference? get userId => _userId;
-  bool hasUserId() => _userId != null;
-
-  // "garage_id" field.
-  DocumentReference? _garageId;
-  DocumentReference? get garageId => _garageId;
-  bool hasGarageId() => _garageId != null;
-
-  // "service_id" field.
-  DocumentReference? _serviceId;
-  DocumentReference? get serviceId => _serviceId;
-  bool hasServiceId() => _serviceId != null;
-
   // "booking_status" field.
   String? _bookingStatus;
   String get bookingStatus => _bookingStatus ?? '';
@@ -45,19 +26,39 @@ class BookingDetailsRecord extends FirestoreRecord {
   DateTime? get bookingDateTime => _bookingDateTime;
   bool hasBookingDateTime() => _bookingDateTime != null;
 
-  // "total_price" field.
-  int? _totalPrice;
-  int get totalPrice => _totalPrice ?? 0;
-  bool hasTotalPrice() => _totalPrice != null;
+  // "services" field.
+  List<String>? _services;
+  List<String> get services => _services ?? const [];
+  bool hasServices() => _services != null;
+
+  // "vehicle" field.
+  String? _vehicle;
+  String get vehicle => _vehicle ?? '';
+  bool hasVehicle() => _vehicle != null;
+
+  // "booking_time" field.
+  String? _bookingTime;
+  String get bookingTime => _bookingTime ?? '';
+  bool hasBookingTime() => _bookingTime != null;
+
+  // "additionalservice" field.
+  String? _additionalservice;
+  String get additionalservice => _additionalservice ?? '';
+  bool hasAdditionalservice() => _additionalservice != null;
+
+  // "user_id" field.
+  DocumentReference? _userId;
+  DocumentReference? get userId => _userId;
+  bool hasUserId() => _userId != null;
 
   void _initializeFields() {
-    _bookingId = castToType<int>(snapshotData['booking_id']);
-    _userId = snapshotData['user_id'] as DocumentReference?;
-    _garageId = snapshotData['garage_id'] as DocumentReference?;
-    _serviceId = snapshotData['service_id'] as DocumentReference?;
     _bookingStatus = snapshotData['booking_status'] as String?;
     _bookingDateTime = snapshotData['booking_date_time'] as DateTime?;
-    _totalPrice = castToType<int>(snapshotData['total_price']);
+    _services = getDataList(snapshotData['services']);
+    _vehicle = snapshotData['vehicle'] as String?;
+    _bookingTime = snapshotData['booking_time'] as String?;
+    _additionalservice = snapshotData['additionalservice'] as String?;
+    _userId = snapshotData['user_id'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -95,23 +96,21 @@ class BookingDetailsRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createBookingDetailsRecordData({
-  int? bookingId,
-  DocumentReference? userId,
-  DocumentReference? garageId,
-  DocumentReference? serviceId,
   String? bookingStatus,
   DateTime? bookingDateTime,
-  int? totalPrice,
+  String? vehicle,
+  String? bookingTime,
+  String? additionalservice,
+  DocumentReference? userId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'booking_id': bookingId,
-      'user_id': userId,
-      'garage_id': garageId,
-      'service_id': serviceId,
       'booking_status': bookingStatus,
       'booking_date_time': bookingDateTime,
-      'total_price': totalPrice,
+      'vehicle': vehicle,
+      'booking_time': bookingTime,
+      'additionalservice': additionalservice,
+      'user_id': userId,
     }.withoutNulls,
   );
 
@@ -124,24 +123,25 @@ class BookingDetailsRecordDocumentEquality
 
   @override
   bool equals(BookingDetailsRecord? e1, BookingDetailsRecord? e2) {
-    return e1?.bookingId == e2?.bookingId &&
-        e1?.userId == e2?.userId &&
-        e1?.garageId == e2?.garageId &&
-        e1?.serviceId == e2?.serviceId &&
-        e1?.bookingStatus == e2?.bookingStatus &&
+    const listEquality = ListEquality();
+    return e1?.bookingStatus == e2?.bookingStatus &&
         e1?.bookingDateTime == e2?.bookingDateTime &&
-        e1?.totalPrice == e2?.totalPrice;
+        listEquality.equals(e1?.services, e2?.services) &&
+        e1?.vehicle == e2?.vehicle &&
+        e1?.bookingTime == e2?.bookingTime &&
+        e1?.additionalservice == e2?.additionalservice &&
+        e1?.userId == e2?.userId;
   }
 
   @override
   int hash(BookingDetailsRecord? e) => const ListEquality().hash([
-        e?.bookingId,
-        e?.userId,
-        e?.garageId,
-        e?.serviceId,
         e?.bookingStatus,
         e?.bookingDateTime,
-        e?.totalPrice
+        e?.services,
+        e?.vehicle,
+        e?.bookingTime,
+        e?.additionalservice,
+        e?.userId
       ]);
 
   @override
