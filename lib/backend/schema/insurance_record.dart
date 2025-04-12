@@ -20,11 +20,6 @@ class InsuranceRecord extends FirestoreRecord {
   DocumentReference? get userId => _userId;
   bool hasUserId() => _userId != null;
 
-  // "vehicle_id" field.
-  DocumentReference? _vehicleId;
-  DocumentReference? get vehicleId => _vehicleId;
-  bool hasVehicleId() => _vehicleId != null;
-
   // "insurance_provider" field.
   String? _insuranceProvider;
   String get insuranceProvider => _insuranceProvider ?? '';
@@ -47,7 +42,6 @@ class InsuranceRecord extends FirestoreRecord {
 
   void _initializeFields() {
     _userId = snapshotData['user_id'] as DocumentReference?;
-    _vehicleId = snapshotData['vehicle_id'] as DocumentReference?;
     _insuranceProvider = snapshotData['insurance_provider'] as String?;
     _title = snapshotData['title'] as String?;
     _desc = snapshotData['desc'] as String?;
@@ -90,7 +84,6 @@ class InsuranceRecord extends FirestoreRecord {
 
 Map<String, dynamic> createInsuranceRecordData({
   DocumentReference? userId,
-  DocumentReference? vehicleId,
   String? insuranceProvider,
   String? title,
   String? desc,
@@ -99,7 +92,6 @@ Map<String, dynamic> createInsuranceRecordData({
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'user_id': userId,
-      'vehicle_id': vehicleId,
       'insurance_provider': insuranceProvider,
       'title': title,
       'desc': desc,
@@ -116,7 +108,6 @@ class InsuranceRecordDocumentEquality implements Equality<InsuranceRecord> {
   @override
   bool equals(InsuranceRecord? e1, InsuranceRecord? e2) {
     return e1?.userId == e2?.userId &&
-        e1?.vehicleId == e2?.vehicleId &&
         e1?.insuranceProvider == e2?.insuranceProvider &&
         e1?.title == e2?.title &&
         e1?.desc == e2?.desc &&
@@ -124,14 +115,8 @@ class InsuranceRecordDocumentEquality implements Equality<InsuranceRecord> {
   }
 
   @override
-  int hash(InsuranceRecord? e) => const ListEquality().hash([
-        e?.userId,
-        e?.vehicleId,
-        e?.insuranceProvider,
-        e?.title,
-        e?.desc,
-        e?.displayPrice
-      ]);
+  int hash(InsuranceRecord? e) => const ListEquality().hash(
+      [e?.userId, e?.insuranceProvider, e?.title, e?.desc, e?.displayPrice]);
 
   @override
   bool isValidKey(Object? o) => o is InsuranceRecord;

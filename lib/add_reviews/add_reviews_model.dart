@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'add_service_widget.dart' show AddServiceWidget;
+import 'add_reviews_widget.dart' show AddReviewsWidget;
 import 'package:flutter/material.dart';
 
-class AddServiceModel extends FlutterFlowModel<AddServiceWidget> {
+class AddReviewsModel extends FlutterFlowModel<AddReviewsWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.
@@ -14,14 +14,6 @@ class AddServiceModel extends FlutterFlowModel<AddServiceWidget> {
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode3;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode4;
-  TextEditingController? textController4;
-  String? Function(BuildContext, String?)? textController4Validator;
 
   @override
   void initState(BuildContext context) {}
@@ -33,11 +25,5 @@ class AddServiceModel extends FlutterFlowModel<AddServiceWidget> {
 
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
-
-    textFieldFocusNode3?.dispose();
-    textController3?.dispose();
-
-    textFieldFocusNode4?.dispose();
-    textController4?.dispose();
   }
 }

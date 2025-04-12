@@ -556,8 +556,8 @@ class _SettingWidgetState extends State<SettingWidget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
-                                        context
-                                            .pushNamed(SoundWidget.routeName);
+                                        context.pushNamed(
+                                            AddReviewsWidget.routeName);
                                       },
                                       child: Container(
                                         width: double.infinity,
@@ -580,8 +580,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                                                             .fromSTEB(12.0, 0.0,
                                                                 12.0, 0.0),
                                                     child: Icon(
-                                                      Icons
-                                                          .notifications_active_outlined,
+                                                      Icons.rate_review_sharp,
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -590,7 +589,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    'Sound & Vibration',
+                                                    'Add Reviews',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium

@@ -1,31 +1,32 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
-import 'add_service_model.dart';
-export 'add_service_model.dart';
+import 'add_insurance_model.dart';
+export 'add_insurance_model.dart';
 
-class AddServiceWidget extends StatefulWidget {
-  const AddServiceWidget({super.key});
+class AddInsuranceWidget extends StatefulWidget {
+  const AddInsuranceWidget({super.key});
 
-  static String routeName = 'AddService';
-  static String routePath = '/addService';
+  static String routeName = 'AddInsurance';
+  static String routePath = '/addInsurance';
 
   @override
-  State<AddServiceWidget> createState() => _AddServiceWidgetState();
+  State<AddInsuranceWidget> createState() => _AddInsuranceWidgetState();
 }
 
-class _AddServiceWidgetState extends State<AddServiceWidget> {
-  late AddServiceModel _model;
+class _AddInsuranceWidgetState extends State<AddInsuranceWidget> {
+  late AddInsuranceModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AddServiceModel());
+    _model = createModel(context, () => AddInsuranceModel());
 
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -38,6 +39,9 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
 
     _model.textController4 ??= TextEditingController();
     _model.textFieldFocusNode4 ??= FocusNode();
+
+    _model.textController5 ??= TextEditingController();
+    _model.textFieldFocusNode5 ??= FocusNode();
   }
 
   @override
@@ -74,7 +78,7 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
             },
           ),
           title: Text(
-            'Add Service',
+            'Add Insurance',
             style: FlutterFlowTheme.of(context).headlineSmall.override(
                   fontFamily: 'Readex Pro',
                   color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -176,8 +180,7 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
-                                                        labelText:
-                                                            'Service_Name',
+                                                        labelText: 'user_id',
                                                         hintStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -301,7 +304,7 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
                                                       decoration:
                                                           InputDecoration(
                                                         labelText:
-                                                            'Description',
+                                                            'Insurance_Provider',
                                                         hintStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -424,7 +427,7 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
-                                                        labelText: 'Price',
+                                                        labelText: 'Title',
                                                         hintStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -547,7 +550,8 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
-                                                        labelText: 'Status',
+                                                        labelText:
+                                                            'Description',
                                                         hintStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -653,6 +657,129 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    child: TextFormField(
+                                                      controller: _model
+                                                          .textController5,
+                                                      focusNode: _model
+                                                          .textFieldFocusNode5,
+                                                      autofocus: false,
+                                                      textCapitalization:
+                                                          TextCapitalization
+                                                              .words,
+                                                      textInputAction:
+                                                          TextInputAction.next,
+                                                      obscureText: false,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText: 'Price',
+                                                        hintStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  color: Color(
+                                                                      0xFF101518),
+                                                                  fontSize:
+                                                                      14.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                ),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                            width: 1.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                        ),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0xFF06D5CD),
+                                                            width: 1.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                        ),
+                                                        filled: true,
+                                                        fillColor:
+                                                            Color(0xFFF5FBFB),
+                                                      ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            color: Color(
+                                                                0xFF101518),
+                                                            fontSize: 14.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                          ),
+                                                      cursorColor:
+                                                          Color(0xFF101518),
+                                                      validator: _model
+                                                          .textController5Validator
+                                                          .asValidator(context),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.all(2.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
                                                 FlutterFlowIconButton(
                                                   borderRadius: 8.0,
                                                   buttonSize: 40.0,
@@ -665,25 +792,26 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
                                                     size: 24.0,
                                                   ),
                                                   onPressed: () async {
-                                                    await ServiceRecord
+                                                    await InsuranceRecord
                                                         .collection
                                                         .doc()
                                                         .set(
-                                                            createServiceRecordData(
-                                                          serviceName: _model
-                                                              .textController1
-                                                              .text,
-                                                          description: _model
-                                                              .textController2
-                                                              .text,
-                                                          availabilityStatus:
+                                                            createInsuranceRecordData(
+                                                          userId:
+                                                              currentUserReference,
+                                                          insuranceProvider:
                                                               _model
-                                                                  .textController4
+                                                                  .textController2
                                                                   .text,
-                                                          price: int.tryParse(
-                                                              _model
-                                                                  .textController3
-                                                                  .text),
+                                                          title: _model
+                                                              .textController3
+                                                              .text,
+                                                          desc: _model
+                                                              .textController4
+                                                              .text,
+                                                          displayPrice: _model
+                                                              .textController5
+                                                              .text,
                                                         ));
                                                     ScaffoldMessenger.of(
                                                             context)

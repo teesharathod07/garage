@@ -35,3 +35,7 @@ export '/add_service/add_service_widget.dart' show AddServiceWidget;
 export '/vehicle_information/vehicle_information_widget.dart'
     show VehicleInformationWidget;
 export '/sd/sd_widget.dart' show SdWidget;
+export '/view_reviews/view_reviews_widget.dart' show ViewReviewsWidget;
+export '/garage_info/garage_info_widget.dart' show GarageInfoWidget;
+export '/add_reviews/add_reviews_widget.dart' show AddReviewsWidget;
+export '/add_insurance/add_insurance_widget.dart' show AddInsuranceWidget;

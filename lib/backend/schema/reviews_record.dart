@@ -25,15 +25,9 @@ class ReviewsRecord extends FirestoreRecord {
   String get reviewText => _reviewText ?? '';
   bool hasReviewText() => _reviewText != null;
 
-  // "user_id" field.
-  DocumentReference? _userId;
-  DocumentReference? get userId => _userId;
-  bool hasUserId() => _userId != null;
-
   void _initializeFields() {
     _rating = castToType<int>(snapshotData['rating']);
     _reviewText = snapshotData['review_text'] as String?;
-    _userId = snapshotData['user_id'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -73,13 +67,11 @@ class ReviewsRecord extends FirestoreRecord {
 Map<String, dynamic> createReviewsRecordData({
   int? rating,
   String? reviewText,
-  DocumentReference? userId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'rating': rating,
       'review_text': reviewText,
-      'user_id': userId,
     }.withoutNulls,
   );
 
@@ -91,14 +83,12 @@ class ReviewsRecordDocumentEquality implements Equality<ReviewsRecord> {
 
   @override
   bool equals(ReviewsRecord? e1, ReviewsRecord? e2) {
-    return e1?.rating == e2?.rating &&
-        e1?.reviewText == e2?.reviewText &&
-        e1?.userId == e2?.userId;
+    return e1?.rating == e2?.rating && e1?.reviewText == e2?.reviewText;
   }
 
   @override
   int hash(ReviewsRecord? e) =>
-      const ListEquality().hash([e?.rating, e?.reviewText, e?.userId]);
+      const ListEquality().hash([e?.rating, e?.reviewText]);
 
   @override
   bool isValidKey(Object? o) => o is ReviewsRecord;

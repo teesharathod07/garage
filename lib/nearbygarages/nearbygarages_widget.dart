@@ -260,7 +260,7 @@ class _NearbygaragesWidgetState extends State<NearbygaragesWidget> {
                                                                 onTap:
                                                                     () async {
                                                                   context.pushNamed(
-                                                                      SdWidget
+                                                                      GarageInfoWidget
                                                                           .routeName);
                                                                 },
                                                                 child:

@@ -250,6 +250,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: SdWidget.routeName,
           path: SdWidget.routePath,
           builder: (context, params) => SdWidget(),
+        ),
+        FFRoute(
+          name: ViewReviewsWidget.routeName,
+          path: ViewReviewsWidget.routePath,
+          builder: (context, params) => ViewReviewsWidget(),
+        ),
+        FFRoute(
+          name: GarageInfoWidget.routeName,
+          path: GarageInfoWidget.routePath,
+          builder: (context, params) => GarageInfoWidget(),
+        ),
+        FFRoute(
+          name: AddReviewsWidget.routeName,
+          path: AddReviewsWidget.routePath,
+          builder: (context, params) => AddReviewsWidget(),
+        ),
+        FFRoute(
+          name: AddInsuranceWidget.routeName,
+          path: AddInsuranceWidget.routePath,
+          builder: (context, params) => AddInsuranceWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
